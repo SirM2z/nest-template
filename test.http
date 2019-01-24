@@ -1,0 +1,25 @@
+POST http://localhost:3001/login HTTP/1.1
+content-type: application/json
+
+{
+  "account": "admin",
+  "password": "110110110"
+}
+
+###
+POST http://localhost:3001/register HTTP/1.1
+content-type: application/json
+
+{
+  "account": "ryan",
+  "password": "123456",
+  "name": "ryan"
+}
+
+###
+GET http://localhost:3001/user HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50IjoiYWRtaW4iLCJpYXQiOjE1NDgzMjE2NzMsImV4cCI6MTU0ODMyNTI3M30.L3FdU2lLwyzNnor4MN1_xhM8hbOQ9zFjm64bBo2K4rw
+
+###
+GET http://localhost:3001/test HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50IjoiYWRtaW4iLCJpYXQiOjE1NDgzMjE2NzMsImV4cCI6MTU0ODMyNTI3M30.L3FdU2lLwyzNnor4MN1_xhM8hbOQ9zFjm64bBo2K4rw

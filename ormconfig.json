@@ -1,0 +1,8 @@
+{
+  "type": "mongodb",
+  "host": "localhost",
+  "database": "test",
+  "entities": ["src/**/**.entity{.ts,.js}"],
+  "synchronize": true,
+  "useNewUrlParser": true
+}
