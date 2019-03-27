@@ -1,4 +1,4 @@
-import { Get, Post, Body, Controller, Inject, UseGuards } from '@nestjs/common';
+import { Get, Post, Body, Controller, Inject, UseGuards, HttpException, HttpStatus } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Roles } from './core/decorators/roles.decorator';
 import { RolesGuard } from './core/guards/roles.guard';
@@ -53,6 +53,16 @@ export class AppController {
   @Roles('admin')
   @UseGuards(AuthGuard(), RolesGuard)
   test(): string {
+    return 'Hello test jwt';
+  }
+
+  /**
+   * 用户注册
+   * @param user 用户信息
+   */
+  @Get('testfilter')
+  testfilter(): string {
+    throw new HttpException('用户编号错误', HttpStatus.BAD_REQUEST);
     return 'Hello test jwt';
   }
 }
