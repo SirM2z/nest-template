@@ -1,33 +1,40 @@
 import { Column, Entity, ObjectIdColumn, ObjectID } from 'typeorm';
 import { IsString, IsBoolean, IsNotEmpty } from 'class-validator';
+import { ApiErrorCode } from '../../../core/enums/api-error-code.enum';
 
 @Entity()
 export class User {
   @ObjectIdColumn()
-  id: ObjectID;
+  readonly id: ObjectID;
+
+  @Column()
+  @IsString({
+    message: '用户姓名是必不可少的',
+    context: { errorCode: ApiErrorCode.USER_NAME_INVALID },
+  })
+  @IsNotEmpty({
+    message: '用户姓名是必不可少的',
+    context: { errorCode: ApiErrorCode.USER_NAME_INVALID },
+  })
+  readonly account: string;
 
   @Column()
   @IsString()
   @IsNotEmpty()
-  account: string;
+  readonly password: string;
 
   @Column()
   @IsString()
   @IsNotEmpty()
-  password: string;
+  readonly name: string;
 
   @Column()
   @IsString()
   @IsNotEmpty()
-  name: string;
-
-  @Column()
-  @IsString()
-  @IsNotEmpty()
-  roles: [string] = ['regular'];
+  readonly roles: [string] = ['regular'];
 
   @Column()
   @IsBoolean()
   @IsNotEmpty()
-  isDisabled: boolean = false;
+  readonly isDisabled: boolean = false;
 }

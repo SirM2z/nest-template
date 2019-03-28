@@ -6,6 +6,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthService } from './core/auth/auth.service';
 import { AuthStrategy } from './core/auth/auth.strategy';
+import { ConfigModule } from './core/config/config.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { AuthStrategy } from './core/auth/auth.strategy';
         expiresIn: 3600,
       },
     }),
+    ConfigModule,
   ],
   controllers: [AppController],
   providers: [AppService, AuthService, AuthStrategy],

@@ -1,4 +1,4 @@
-import { Get, Post, Body, Controller, Inject, UseGuards, HttpException, HttpStatus } from '@nestjs/common';
+import { Get, Post, Body, Controller, Inject, UseGuards, HttpException, HttpStatus, Res } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Roles } from './core/decorators/roles.decorator';
 import { RolesGuard } from './core/guards/roles.guard';
@@ -8,6 +8,9 @@ import { UserService } from './feature/user/user.service';
 import { AuthService } from './core/auth/auth.service';
 import { User } from './feature/user/entity/user.entity';
 import { LoginDto } from './feature/user/dto/login.dto';
+import { ApiErrorCode } from './core/enums/api-error-code.enum';
+import { ApiException } from './core/exceptions/api.exception';
+import { View } from './core/libs/View';
 
 @Controller()
 export class AppController {
@@ -46,8 +49,7 @@ export class AppController {
   }
 
   /**
-   * 用户注册
-   * @param user 用户信息
+   * 测试守卫 用来做权限
    */
   @Get('test')
   @Roles('admin')
@@ -57,12 +59,20 @@ export class AppController {
   }
 
   /**
-   * 用户注册
-   * @param user 用户信息
+   * 测试异常捕获
    */
   @Get('testfilter')
   testfilter(): string {
+    throw new ApiException('用户编号错误', ApiErrorCode.USER_ID_INVALID, HttpStatus.BAD_REQUEST);
     throw new HttpException('用户编号错误', HttpStatus.BAD_REQUEST);
     return 'Hello test jwt';
+  }
+
+  /**
+   * 测试模板引擎
+   */
+  @Get('testview')
+  testview(): View {
+    return new View('index.art');
   }
 }
